@@ -19,8 +19,8 @@
     width: 80%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
+    
 }
 
 .question-title{
@@ -28,15 +28,31 @@
     text-align: left;
     border: solid red;
     width: 40%;
+    font-size: 2rem;
 }
 
 .choices {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    row-gap: 15px;
     justify-content: center;
     border: solid yellow;
     width: 100%;
+    list-style: none;
+}
+
+.choice {
+background-color: rgb(23, 23, 192);
+border-radius: 8px;
+color: aliceblue;
+font-size: 1.5rem;
+width: 50%;
+padding: 10px;
+}
+
+.choice:hover {
+    background-color: rgb(193, 144, 239);
 }
 
 .hs-timer {
@@ -44,7 +60,8 @@
     justify-content: space-between;
     align-items: baseline;
     gap:10px;
-    border: solid red;
+    border: dotted red;
+    font-size: 1.1rem;
 }
 
 /* this class will hide any element with its class. We can use .classlist to add and remove this class to 
