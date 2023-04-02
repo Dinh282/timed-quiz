@@ -46,3 +46,9 @@
     gap:10px;
     border: solid red;
 }
+
+/* this class will hide any element with its class. We can use .classlist to add and remove this class to 
+hide or reveal elements*/
+.hide {
+    display:none;
+}
