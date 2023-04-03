@@ -11,37 +11,44 @@
 
 <body class="body">
     <nav class="hs-timer">
-        <a>View High Scores</a>
-        <p id="timer">Timer : </p>
+        <a id="hs-list">View High Scores</a>
+        <p id="timer">Time: 90</p>
     </nav>
 
     <main>
         <section class ="question-container hide" id="container">
             <div class="question" >
             <h1  class="question-title" id="quest-title">Question Place Holder </h1> 
-                <ol class="choices">
-                    <li class ="choice" id="choice">A</li>
-                    <li class ="choice" id="choice">B</li>
-                    <li class ="choice" id="choice">C</li>
-                    <li class ="choice" id="choice">D</li>
-                </ol>
+                <div class="choices">
+                    <div class ="choice" id="choice1">A</div>
+                    <div class ="choice" id="choice2">B</div>
+                    <div class ="choice" id="choice3">C</div>
+                    <div class ="choice" id="choice4">D</div>
+                    <p class="hide correct-wrong" id="correct">Correct, 10 bonus points added!</p>
+                    <p class="hide correct-wrong" id="wrong">Wrong, 10 seconds deducted!</p>
+                </div>
             </div>    
         </section>
 
         <!-- TODO: div div to show under choices with "correct" or "wrong" after user select an answer -->
-        <div></div>
+        <!-- <div class="hide" id="correct">Correct, 10 bonus points added!</div>
+        <div class="hide" id="wrong">Wrong, 10 seconds deducted!</div> -->
 
 
 
-        <section id="hs-container">
-            <p id="hs-list">High Score List</p>
-
-
+        <section id="main-page">
+            <p class="coding-title" id="hs-list">Coding Quiz Challenge</p>
+            <p class="coding-subtitle">Try to answer the colloing code-related questions within the time limit. 
+                Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+            </p>
         </section>
 
+        <div class="btns">
+            <button class="startBtn" id="start-btn">Start Quiz</button>
+            <button class="hide" id="go-back-btn">Go back</button>
+            <button class="hide" id="clear-hs-btn">Clear High Score</button>
+        </div>
 
-        <button id="start-btn">Start Quiz</button>
-        <button class="hide" id="play-again-btn">Play Again</button>
     </main>
 
 
