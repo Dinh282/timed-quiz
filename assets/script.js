@@ -7,7 +7,7 @@ const goBackBtn = document.getElementById("go-back-btn");
 const question = document.getElementById("question"); // might not need if we store questions in an array.
 const choices = document.getElementById("choices"); //
 const answer = document.getElementById("choice")// 
-const timer = document.getElementById("timer");
+const timerTxt = document.getElementById("timer");
 const mainPage = document.getElementById("main-page");
 const hsList = document.getElementById("hs-list")
 const correctDiv = document.getElementById("correct");
@@ -21,6 +21,7 @@ var questCount= 0;
 var highScores = [];
 var copyOfQuestion = []; 
 var acceptingInputs = false;
+var timer;
 
 var questions =[
     {
@@ -92,7 +93,7 @@ quizContainer.classList.remove("hide");
 
 // setInterval allows repeated calls of a function or executes a code snippet
 //with a fixed time delay. time is in milli second so a value of 1000 = 1 second.
-setInterval(countdownTimer, 1000);
+timer = setInterval(countdownTimer, 1000);
 showQuestions();
 
 }
@@ -122,14 +123,10 @@ function showQuestions() {
 
         copyOfQuestion.splice(randQuestIdx, 1);
 
-       
         choiceBtn1.addEventListener('click', answerCheck);
         choiceBtn2.addEventListener('click', answerCheck);
         choiceBtn3.addEventListener('click', answerCheck);
         choiceBtn4.addEventListener('click', answerCheck);
-        
-        
-     
 
 }
 
@@ -143,7 +140,7 @@ function answerCheck(event) {
         if(questCount === questions.length){
             setTimeout(stopQuiz, 2000);
         }else{
-        setTimeout(showQuestions, 2000);
+         setTimeout(showQuestions, 2000);
 
         }
 
@@ -153,7 +150,7 @@ function answerCheck(event) {
         acceptingInputs = false;
         timeRemaining -= 10;
         score -= 10;
-    }if(timeRemaining < 0){
+    }if(timeRemaining <= 0){
         timeRemaining = 0;
     }
     
@@ -161,7 +158,7 @@ function answerCheck(event) {
 
 function countdownTimer(){
     timeRemaining--;
-    timer.innerText = `Time: ${timeRemaining}`;
+    timerTxt.innerText = `Time: ${timeRemaining}`;
     if(timeRemaining <= 0){
         stopQuiz();
     }
@@ -169,12 +166,13 @@ function countdownTimer(){
 }
 
 function stopQuiz() {
-    //clearInterval is the opposite of setInterval. it stops the recurring calling of a function.
- clearInterval(countdownTimer);
+ //clearInterval is the opposite of setInterval. it stops the recurring calling of a function.
+ clearTimeout(timer);
+ timer.innerText = `Time: ${timeRemaining}`;
+
  correctDiv.classList.add("hide");
  wrongDiv.classList.add("hide");
- timer.innerText = `Time: ${timeRemaining}`;
- 
+
  showResults();
 
 
