@@ -12,15 +12,15 @@ const mainPage = document.getElementById("main-page");
 const hsList = document.getElementById("hs-list")
 const correctDiv = document.getElementById("correct");
 const wrongDiv = document.getElementById("wrong");
+const resultPage = document.getElementById("result-page");
+const scoreText = document.getElementById("result-text");
 
 // variables in regards to the game
-var score = 0;
 var currentQuestion = {};
-var timeRemaining = 90;
+var timeRemaining = 60;
 var questCount= 0;
 var highScores = [];
 var copyOfQuestion = []; 
-var acceptingInputs = false;
 var timer;
 
 var questions =[
@@ -34,21 +34,21 @@ var questions =[
         options: ["0", "1", "3", "5"],
         answer: "3",
     },
-    // {
-    //     question: "What is 0 + 1?",
-    //     options: ["8", "1", "2", "3"],
-    //     answer: "1",
-    // },
-    // {
-    //     question: "What is 2 - 1?",
-    //     options: ["7", "1", "2", "3"],
-    //     answer: "1",
-    // },
-    // {
-    //     question: "What is 2 + 2?",
-    //     options: ["0", "4", "2", "3"],
-    //     answer: "4",
-    // },
+    {
+        question: "What is 0 + 1?",
+        options: ["8", "1", "2", "3"],
+        answer: "1",
+    },
+    {
+        question: "What is 2 - 1?",
+        options: ["7", "1", "2", "3"],
+        answer: "1",
+    },
+    {
+        question: "What is 2 + 2?",
+        options: ["0", "4", "2", "3"],
+        answer: "4",
+    },
     // {
     //     question: "What is 5 - 2?",
     //     options: ["0", "1", "3", "5"],
@@ -80,9 +80,6 @@ goBackBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
 // initiate game. reset variables to default.
-score = 0;
-randQuestIdx = 0;
-timeRemaining = 90;
 copyOfQuestion = [...questions];
 
 // .classList allows us to add, remove, or replace classes. 
@@ -101,7 +98,6 @@ showQuestions();
 
 function showQuestions() {
     questCount++;
-    acceptingInputs = true;
     correctDiv.classList.add("hide");
     wrongDiv.classList.add("hide");
     var randQuestIdx = Math.floor(Math.random() * copyOfQuestion.length);
@@ -132,28 +128,22 @@ function showQuestions() {
 
 
 function answerCheck(event) {
+    
     var userSelection = event.target.textContent;
-    if(userSelection === currentQuestion.answer && acceptingInputs){
+    if(userSelection === currentQuestion.answer){
         acceptingInputs = false;
         correctDiv.classList.remove("hide");
-
-        if(questCount === questions.length){
-            setTimeout(stopQuiz, 2000);
-        }else{
-         setTimeout(showQuestions, 2000);
-
-        }
-
     }else{
         wrongDiv.classList.remove("hide");
-        setTimeout(showQuestions, 2000);
         acceptingInputs = false;
         timeRemaining -= 10;
-        score -= 10;
-    }if(timeRemaining <= 0){
-        timeRemaining = 0;
     }
-    
+
+    if(questCount === questions.length){
+            setTimeout(stopQuiz, 2000);
+    }
+
+    setTimeout(showQuestions, 2000);
 }
 
 function countdownTimer(){
@@ -174,15 +164,15 @@ function stopQuiz() {
  wrongDiv.classList.add("hide");
 
  showResults();
-
-
  showHighScore();  
  quizContainer.classList.add("hide"); 
 }
 
 
 function showResults(){
+scoreText.innerText = `Your final score is ${timeRemaining}.`
 
+resultPage.classList.remove("hide");
 };
 
 

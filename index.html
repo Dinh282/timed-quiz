@@ -11,8 +11,8 @@
 
 <body class="body">
     <nav class="hs-timer">
-        <a id="hs-list">View High Scores</a>
-        <p id="timer"></p>
+        <p><a id="hs-list">View High Scores</a></p>
+        <p id="timer">Time: 0</p>
     </nav>
 
     <main>
@@ -20,27 +20,32 @@
             <div class="question" >
             <h1  class="question-title" id="quest-title">Question Place Holder </h1> 
                 <div class="choices">
-                    <div class ="choice" id="choice1">A</div>
-                    <div class ="choice" id="choice2">B</div>
-                    <div class ="choice" id="choice3">C</div>
-                    <div class ="choice" id="choice4">D</div>
-                    <p class="hide correct-wrong" id="correct">Correct, 10 bonus points added!</p>
-                    <p class="hide correct-wrong" id="wrong">Wrong, 10 seconds deducted!</p>
+                    <div class="choice" id="choice1" role="button">A</div>
+                    <div class="choice" id="choice2" role="button">B</div>
+                    <div class="choice" id="choice3" role="button">C</div>
+                    <div class="choice" id="choice4" role="button">D</div>
+                    <p class="hide correct-wrong" id="correct">Correct!</p>
+                    <p class="hide correct-wrong" id="wrong">Wrong!</p>
                 </div>
             </div>    
         </section>
 
-        <!-- TODO: div div to show under choices with "correct" or "wrong" after user select an answer -->
-        <!-- <div class="hide" id="correct">Correct, 10 bonus points added!</div>
-        <div class="hide" id="wrong">Wrong, 10 seconds deducted!</div> -->
-
-
 
         <section id="main-page">
-            <p class="coding-title" id="hs-list">Coding Quiz Challenge</p>
-            <p class="coding-subtitle">Try to answer the colloing code-related questions within the time limit. 
+            <p class="title" id="hs-list">Coding Quiz Challenge</p>
+            <p class="subtitle">Try to answer the colloing code-related questions within the time limit. 
                 Keep in mind that incorrect answers will penalize your score/time by ten seconds!
             </p>
+        </section>
+
+        <section class="result-container hide" id="result-page">
+            <p class="title">All done!</p>
+            <p class="subtitle" id="result-text"></p>
+            <form>
+            <label for="inital">Enter initials:</label>
+            <input type="text"> 
+            <input type="submit" class="submit-btn"> 
+            </form>
         </section>
 
         <div class="btns">

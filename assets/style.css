@@ -8,7 +8,7 @@
     padding: 50px;
 }
 
-.question-container {
+.question-container, .result-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +48,7 @@
     list-style: none;
 }
 
-.choice, .startBtn{
+.choice, .startBtn {
 background-color: rgb(23, 23, 192);
 border-radius: 8px;
 color: aliceblue;
@@ -60,6 +60,12 @@ padding: 10px;
 .startBtn {
     text-align: center;
     width: 15%;
+}
+
+.submit-btn{
+    background-color: rgb(23, 23, 192);
+    border-radius: 8px;
+    color: aliceblue;
 }
 
 .choice:hover {
@@ -88,16 +94,17 @@ hide or reveal elements*/
 
 }
 
-.coding-title {
+.title {
     font:bolder;
     font-size: 2rem;
     text-align: center;
 }
 
-.coding-subtitle {
+.subtitle {
     text-align: center;
     font-size: 1.3rem;
 }
+
 
 
 @media (max-width: 740px)  {
