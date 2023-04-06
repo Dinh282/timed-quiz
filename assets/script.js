@@ -15,14 +15,18 @@ const wrongDiv = document.getElementById("wrong");
 const resultPage = document.getElementById("result-page");
 const scoreText = document.getElementById("result-text");
 
+var choiceBtn1 = document.getElementById("choice1");
+var choiceBtn2 = document.getElementById("choice2");
+var choiceBtn3 = document.getElementById("choice3");
+var choiceBtn4 = document.getElementById("choice4");
+var choiceBtns = [choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4]
+
 // variables in regards to the game
 var currentQuestion = {};
 var timeRemaining = 60;
 var questCount= 0;
 var highScores = [];
-var copyOfQuestion = []; 
 var timer;
-
 var questions =[
     {
         question: "What is 1 + 1?",
@@ -67,9 +71,9 @@ var questions =[
 
 ];
 
+var copyOfQuestion = [...questions];
+
 startBtn.innerText = `Start Quiz`;
-
-
 
 // addEventListener to listen for interactions from user (in this case, clicks) and then calls for a function.
 startBtn.addEventListener("click", startQuiz);
@@ -79,9 +83,6 @@ goBackBtn.addEventListener("click", startQuiz);
 
 
 function startQuiz() {
-// initiate game. reset variables to default.
-copyOfQuestion = [...questions];
-
 // .classList allows us to add, remove, or replace classes. 
 startBtn.classList.add("hide");
 mainPage.classList.add("hide");
@@ -89,36 +90,46 @@ goBackBtn.classList.add("hide");
 quizContainer.classList.remove("hide");
 
 // setInterval allows repeated calls of a function or executes a code snippet
-//with a fixed time delay. time is in milli second so a value of 1000 = 1 second.
+//with a fixed time delay. time is in milli-second so a value of 1000 = 1 second.
 timer = setInterval(countdownTimer, 1000);
 showQuestions();
-
 }
-
 
 function showQuestions() {
     questCount++;
+    setTimeout( () => {
     correctDiv.classList.add("hide");
     wrongDiv.classList.add("hide");
+    }, 2000);
+
+
+    //this line generates a random number to used as an index to randomly pick a question from our questions array.
     var randQuestIdx = Math.floor(Math.random() * copyOfQuestion.length);
     // var randOptionIdx = Math.floor(Math.random() * copyOfQuestion["options"].length);
     var questionTitle = document.getElementById("quest-title");
     currentQuestion = copyOfQuestion[randQuestIdx];
     questionTitle.textContent = currentQuestion.question;
+    //we splice out the displayed question to avoid the same questions being randomly chosen the next time
+    //showQuestion() is called
+    copyOfQuestion.splice(randQuestIdx, 1);
+
     
-        var choiceBtn1 = document.getElementById("choice1");
-        var choiceBtn2 = document.getElementById("choice2");
-        var choiceBtn3 = document.getElementById("choice3");
-        var choiceBtn4 = document.getElementById("choice4");
+    //this for loops shuffles the array of answer choice buttons
+    for( var i = choiceBtns.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i+1));
+        [choiceBtns[i], choiceBtns[j]] = [choiceBtns[j], choiceBtns[i]];
+    }  
+    //this for loops sets the text from the options of the current question to each of the 
+    //button from the "shuffled" array. This allows the order of the choices to be randomized everytime
+    // showQuestions() is called.
+    for(var i = 0; i < choiceBtns.length; i++){
+        choiceBtns[i].textContent = currentQuestion.options[i];
+    }
 
 
-        choiceBtn1.textContent = currentQuestion.options[0];
-        choiceBtn2.textContent = currentQuestion.options[1];
-        choiceBtn3.textContent = currentQuestion.options[2];
-        choiceBtn4.textContent = currentQuestion.options[3];
-
-        copyOfQuestion.splice(randQuestIdx, 1);
-
+        
+        //TODO: ask for help. Need a way to have user choose just one option and disable the rest of the buttons until 
+        // showQuestions() is called again...
         choiceBtn1.addEventListener('click', answerCheck);
         choiceBtn2.addEventListener('click', answerCheck);
         choiceBtn3.addEventListener('click', answerCheck);
@@ -131,11 +142,9 @@ function answerCheck(event) {
     
     var userSelection = event.target.textContent;
     if(userSelection === currentQuestion.answer){
-        acceptingInputs = false;
         correctDiv.classList.remove("hide");
     }else{
         wrongDiv.classList.remove("hide");
-        acceptingInputs = false;
         timeRemaining -= 10;
     }
 
@@ -143,16 +152,15 @@ function answerCheck(event) {
             setTimeout(stopQuiz, 2000);
     }
 
-    setTimeout(showQuestions, 2000);
+    setTimeout(showQuestions, 0);
 }
 
-function countdownTimer(){
+function countdownTimer() {
     timeRemaining--;
     timerTxt.innerText = `Time: ${timeRemaining}`;
     if(timeRemaining <= 0){
         stopQuiz();
     }
-
 }
 
 function stopQuiz() {
@@ -169,9 +177,8 @@ function stopQuiz() {
 }
 
 
-function showResults(){
+function showResults() {
 scoreText.innerText = `Your final score is ${timeRemaining}.`
-
 resultPage.classList.remove("hide");
 };
 
