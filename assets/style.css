@@ -10,7 +10,7 @@
     height: 700px;
 }
 
-.question-container, .result-container {
+.question-container, .result-container, .hs-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,6 +64,12 @@ width: 40%;
 padding: 10px;
 }
 
+#go-back-btn, #clear-hs-btn {
+    background-color: rgb(23, 23, 192);
+    color: aliceblue;
+    border-radius: 8px;
+}
+
 .startBtn {
     text-align: center;
     width: 15%;
@@ -77,6 +83,7 @@ padding: 10px;
 
 .choice:hover {
     background-color: rgb(193, 144, 239);
+    cursor: pointer;
 }
 
 .hs-timer {
@@ -97,7 +104,6 @@ hide or reveal elements*/
 .btns {
     display: flex;
     justify-content: space-evenly;
-    /* border: solid pink; */
 }
 
 .title {
@@ -111,6 +117,9 @@ hide or reveal elements*/
     font-size: 1.3rem;
 }
 
+.spacer {
+    margin-top: 50px;
+}
 
 
 @media (max-width: 740px)  {

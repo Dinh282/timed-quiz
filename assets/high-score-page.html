@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Score</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body clas="hs-body">
+    <section class="hs-section">
+        <div class="spacer"></div>
+        <h1 class="title">Highscores</h1>
+            <div id="hs-entries"></div>
+        <div>    
+        <!--the onclick attribute is an event attribute that fires on the click of 
+        the button. history is an object representing an array of URLs visited by user.
+        .back() method brings user back one page.-->
+        <button id="go-back-btn" onclick="history.back()">Go back</button>
+        <button id="clear-hs-btn">Clear High Score</button>
+        </div>
+    </section>
+    <script src="./script.js"></script>
+</body>
+</html>
