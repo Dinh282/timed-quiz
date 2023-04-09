@@ -1,3 +1,6 @@
+a {
+    text-decoration: none;
+}
 
 .body{
     display:flex;
@@ -8,18 +11,23 @@
     padding: 50px;
     border-radius: 5px;
     height: 700px;
+    max-height: fit-content;
 }
 
-.question-container, .result-container, .hs-section {
+.question-container, .result-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: solid green; */
-    /* margin-left: 100px; */
     justify-content: center;
     align-content: center;
-    width: 70%;
+    width: 80%;
     margin-left: 10%;
+}
+
+.hs-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .question {
@@ -55,19 +63,14 @@
     list-style: none;
 }
 
-.choice, .startBtn {
+.choice, 
+.startBtn {
 background-color: rgb(23, 23, 192);
 border-radius: 8px;
 color: aliceblue;
 font-size: 1.5rem;
 width: 40%;
 padding: 10px;
-}
-
-#go-back-btn, #clear-hs-btn {
-    background-color: rgb(23, 23, 192);
-    color: aliceblue;
-    border-radius: 8px;
 }
 
 .startBtn {
@@ -81,7 +84,7 @@ padding: 10px;
     color: aliceblue;
 }
 
-.choice:hover {
+.btn-hover:hover {
     background-color: rgb(193, 144, 239);
     cursor: pointer;
 }
@@ -113,20 +116,28 @@ hide or reveal elements*/
 }
 
 .subtitle {
+    align-content: center;
     text-align: center;
     font-size: 1.3rem;
+    width: 100%;
 }
 
 .spacer {
     margin-top: 50px;
 }
 
+#go-back-btn, 
+#clear-hs-btn {
+    background-color: rgb(23, 23, 192);
+    color: aliceblue;
+    border-radius: 8px;
+}
 
 @media (max-width: 740px)  {
     .hs-timer {
         flex-direction: column;
         align-items: center;
     }
-    
+
 }
 

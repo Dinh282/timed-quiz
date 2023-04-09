@@ -8,18 +8,22 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body clas="hs-body">
+
     <section class="hs-section">
         <div class="spacer"></div>
         <h1 class="title">Highscores</h1>
-            <div id="hs-entries"></div>
+        <ol id="hs-entries"></ol>
         <div>    
         <!--the onclick attribute is an event attribute that fires on the click of 
         the button. history is an object representing an array of URLs visited by user.
         .back() method brings user back one page.-->
-        <button id="go-back-btn" onclick="history.back()">Go back</button>
-        <button id="clear-hs-btn">Clear High Score</button>
+        <button class="btn-hover" id="go-back-btn" onclick="history.back()">Go back</button>
+        <button class="btn-hover" id="clear-hs-btn">Clear High Score</button>
         </div>
     </section>
-    <script src="./script.js"></script>
+
+    
+
+    <script defer src="./hs-script.js" ></script>
 </body>
 </html>

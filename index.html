@@ -19,10 +19,10 @@
             <div class="question" >
             <h1  class="question-title" id="quest-title">Question Place Holder </h1> 
                 <div class="choices">
-                    <div class="choice choice1" id="choice1" role="button">A</div>
-                    <div class="choice choice2" id="choice2" role="button">B</div>
-                    <div class="choice choice3" id="choice3" role="button">C</div>
-                    <div class="choice choice4" id="choice4" role="button">D</div>
+                    <div class="choice btn-hover" id="choice1">A</div>
+                    <div class="choice btn-hover" id="choice2">B</div>
+                    <div class="choice btn-hover" id="choice3">C</div>
+                    <div class="choice btn-hover" id="choice4">D</div>
                     <p class="hide correct-wrong" id="correct">Correct!</p>
                     <p class="hide correct-wrong" id="wrong">Wrong!</p>
                 </div>
@@ -31,7 +31,7 @@
 
 
         <section id="main-page">
-            <p class="title" id="hs-list">Coding Quiz Challenge</p>
+            <p class="title">Coding Quiz Challenge</p>
             <p class="subtitle">Try to answer the following code-related questions within the time limit. 
                 Keep in mind that incorrect answers will penalize your score/time by ten seconds!
             </p>
@@ -40,24 +40,24 @@
         <section class="result-container hide" id="result-page">
             <p class="title">All done!</p>
             <p class="subtitle" id="result-text"></p>
-            <form>
+            <form id="initial-form">
             <label for="inital">Enter initials:</label>
-            <input type="text"> 
-            <input type="submit" class="submit-btn"> 
+            <input type="text" id="user-initial" name="user-initial" required> 
+            <button type="submit" class="submit-btn btn-hover" id="submit-btn">Submit</button> 
             </form>
         </section>
 
         <div class="btns">
-            <button class="startBtn" id="start-btn">Start Quiz</button>
+            <button class="startBtn btn-hover" id="start-btn">Start Quiz</button>
         </div>
-
     </main>
 
+    <!-- <ol id="hs-entries"></ol> -->
+      
     <!-- We link the script last because the browser executes any js on the spot.
     So it is faster for a page to load if we have everything load first and then 
     the script last -->
     <script defer src="./assets/script.js"></script>
-
 
 </body>
 

@@ -1,80 +1,82 @@
-
 // .getElementById is a method that lets us quickly access element object id property that matches the string.
 const quizContainer = document.getElementById("container");
 const startBtn = document.getElementById("start-btn");
+const submitBtn = document.getElementById("initial-form");
 const clearHsBtn = document.getElementById("clear-hs-btn")
-// var result = document.getElementById("result"); 
 const question = document.getElementById("question"); 
-const choices = document.getElementById("choices"); //
-const bttn = document.querySelectorAll(".choice");
 const timerTxt = document.getElementById("timer");
 const mainPage = document.getElementById("main-page");
-const hsList = document.getElementById("hs-list")
 const correctDiv = document.getElementById("correct");
 const wrongDiv = document.getElementById("wrong");
 const resultPage = document.getElementById("result-page");
 const scoreText = document.getElementById("result-text");
 
 
+//gave each answer choice their own variable so we can throw them into an array to shuffle for choice randomization
+var choiceBtn1 = document.getElementById("choice1");
+var choiceBtn2 = document.getElementById("choice2");
+var choiceBtn3 = document.getElementById("choice3");
+var choiceBtn4 = document.getElementById("choice4");
+var choiceBtns = [choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4]
+
 // variables in regards to the game
 var currentQuestion = {};
-var timeRemaining = 60;
+var timeRemaining = 10;
 var questCount= 0;
 var highScores = [];
 var timer;
 var questions =[
     {
-        question: "What is 1 + 1?",
-        options: ["0", "7", "2", "3"],
-        answer: "2",
+        question: "Who is the best web developer?",
+        options: ["Spiderman", "Batman", "Iron Man", "Deadpool"],
+        answer: "Spiderman",
     },
     {
-        question: "What is 1 + 2?",
-        options: ["0", "1", "3", "5"],
-        answer: "3",
+        question: "What two words every programmer learned to code first?",
+        options: ["Hello, world", "Hi, there", "Peace out", "Yo, yo"],
+        answer: "Hello, world",
     },
     {
-        question: "What is 0 + 1?",
-        options: ["8", "1", "2", "3"],
-        answer: "1",
+        question: "Why do programmers keep pressing the F5 button?",
+        options: ["To destress", "Because it's refreshing", "They're bored", "Because they're not pressing F4"],
+        answer: "Because it's refreshing",
     },
     {
-        question: "What is 2 - 1?",
-        options: ["7", "1", "2", "3"],
-        answer: "1",
+        question: "Where did programmers learn to program?",
+        options: ["Mom's basement", "Stackoverflow University", "Public Library", "They're still learning"],
+        answer: "Stackoverflow University",
     },
     {
-        question: "What is 2 + 2?",
-        options: ["0", "4", "2", "3"],
-        answer: "4",
+        question: "What is the most popular programming problem?",
+        options: ["Blue screen of death", "Corrupted files", "Missing a semicolon", 'Print "Hello, World"'],
+        answer: "Missing a semicolon",
     },
     {
-        question: "What is 5 - 2?",
-        options: ["0", "1", "3", "5"],
-        answer: "3",
+        question: "Why are programmers single?",
+        options: ["They commit their lives to code", "Their workload", "They lack social interaction", "No time to date"],
+        answer: "They commit their lives to code",
     },
     {
-        question: "What is 2 + 1?",
-        options: ["3", "1", "2", "5"],
-        answer: "3",
+        question: "How do programmers open a Jar?",
+        options: ["They don't", "They use Java", "They ask other people for help", "They only eat from a can"],
+        answer: "They use Java",
     },
     {
-        question: "What is 2 - 2?",
-        options: ["7", "0", "2", "3"],
-        answer: "0",
+        question: "Why should you marry a programmer?",
+        options: ["They make good money", "They're too busy for you", "They don't know how to communicate", "They're not afraid to commit"],
+        answer: "They're not afraid to commit",
     }
-
 ];
 
 var copyOfQuestion = [...questions];
 
+//setting this condition to rid annoy type error. Since high score page, doesn't have a start button,
+// error is thrown since we can't set innertext and even listeners to null.
+if(startBtn != null){
 startBtn.innerText = `Start Quiz`;
-
 // addEventListener to listen for interactions from user (in this case, clicks) and then calls for a function.
 startBtn.addEventListener("click", startQuiz);
-
-
-
+}
 
 function startQuiz() {
 // .classList allows us to add, remove, or replace classes. 
@@ -110,18 +112,18 @@ function showQuestions() {
 
     
     //this for loops shuffles the array of answer choice buttons
-    for( var i = bttn.length - 1; i > 0; i--) {
+    for( var i = choiceBtns.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i+1));
-        [bttn[i], bttn[j]] = [bttn[j], bttn[i]];
+        [choiceBtns[i], choiceBtns[j]] = [choiceBtns[j], choiceBtns[i]];
     }  
     //this for loops sets the text from the options of the current question to each of the 
     //button from the "shuffled" array. This allows the order of the choices to be randomized everytime
     // showQuestions() is called.
-    for(var i = 0; i < bttn.length; i++) {
-        bttn[i].textContent = currentQuestion.options[i];
+    for(var i = 0; i < choiceBtns.length; i++) {
+        choiceBtns[i].textContent = currentQuestion.options[i];
     }
     // using foreach loop to add eventlistner to each button in the array of bttn  
-    bttn.forEach(element => {
+    choiceBtns.forEach(element => {
         element.addEventListener('click', answerCheck);
     });
 
@@ -130,7 +132,7 @@ function showQuestions() {
 function answerCheck(event) {
     //need to remove eventlistener after one answer choice button is clicked on, otherwise user can spam
     //click the other choices and trigger answerCheck().
-    bttn.forEach(element => {
+    choiceBtns.forEach(element => {
         element.removeEventListener('click', answerCheck);
     });
 
@@ -165,16 +167,77 @@ function stopQuiz() {
  quizContainer.classList.add("hide"); 
  correctDiv.classList.add("hide");
  wrongDiv.classList.add("hide");
- showResults();
- showHighScore();  
+showResults(); 
 }
+
+
 
 function showResults() {
 scoreText.innerText = `Your final score is ${timeRemaining}.`
 resultPage.classList.remove("hide");
+
+
+submitBtn.addEventListener('submit', function (event){
+    event.preventDefault();
+
+     
+    console.log("testing");
+    const userInitial = document.getElementById("user-initial").value;
+    const score = timeRemaining;
+
+
+    const playerScore = {userInitial, score};
+    var scoreList = JSON.parse(localStorage.getItem('scoreList')) || [];
+      window.location.href = "./assets/high-score-page.html";
+    scoreList.push(playerScore);
+    localStorage.setItem("scoreList", JSON.stringify(scoreList));
+    
+    
+    // const hsListElement = document.getElementById("hs-entries");
+     
+    //     hsListElement.textContent = '';
+   
+    
+    // for(var i = 0; i < scoreList.length; i++) {
+    //     var s = scoreList[i];
+    //    var hsEntry = document.createElement('li');
+
+    //     hsEntry.textContent = `${s.userInitial} - ${s.score}`;
+       
+    //     hsListElement.appendChild(hsEntry);
+        
+    // }
+
+});
+   
 };
 
-function showHighScore() {
-    //bring to high score page..
 
-}
+
+
+
+
+// function showHighScore() {
+//     console.log("here")
+//     // window.location.href = "./assets/high-score-page.html";
+//     const hsListElement = document.getElementById("hs-entries");
+
+//     if(null){
+//     hsListElement.textContent = '';
+//     }
+
+//     // console.log(scoreList);
+//     for(var i = 0; i < scoreList.length-1; i++) {
+//         console.log(scoreList[i])
+//         var hsEntry = document.createElement('li');
+       
+//         hsEntry.textContent = `${playerScore.userInitial} - ${playerScore.score}`;
+       
+//         hsListElement.appendChild(hsEntry);
+        
+//     }
+
+
+// }
+
+
