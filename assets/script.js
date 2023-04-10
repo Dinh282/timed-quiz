@@ -2,7 +2,6 @@
 const quizContainer = document.getElementById("container");
 const startBtn = document.getElementById("start-btn");
 const submitBtn = document.getElementById("initial-form");
-const clearHsBtn = document.getElementById("clear-hs-btn")
 const question = document.getElementById("question"); 
 const timerTxt = document.getElementById("timer");
 const mainPage = document.getElementById("main-page");
@@ -10,7 +9,6 @@ const correctDiv = document.getElementById("correct");
 const wrongDiv = document.getElementById("wrong");
 const resultPage = document.getElementById("result-page");
 const scoreText = document.getElementById("result-text");
-
 
 //gave each answer choice their own variable so we can throw them into an array to shuffle for choice randomization
 var choiceBtn1 = document.getElementById("choice1");
@@ -21,11 +19,11 @@ var choiceBtns = [choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4]
 
 // variables in regards to the game
 var currentQuestion = {};
-var timeRemaining = 10;
+var timeRemaining = 100;
 var questCount= 0;
 var highScores = [];
 var timer;
-var questions =[
+var questions = [
     {
         question: "Who is the best web developer?",
         options: ["Spiderman", "Batman", "Iron Man", "Deadpool"],
@@ -68,6 +66,7 @@ var questions =[
     }
 ];
 
+//[...question] is the spread syntax that lets us to expand iterable objects.
 var copyOfQuestion = [...questions];
 
 //setting this condition to rid annoy type error. Since high score page, doesn't have a start button,
@@ -135,7 +134,7 @@ function answerCheck(event) {
     choiceBtns.forEach(element => {
         element.removeEventListener('click', answerCheck);
     });
-
+    //we set the text content of whichever choice the user click on as the variable userSelection to compare with the current answer choice.
     var userSelection = event.target.textContent;
     if(userSelection === currentQuestion.answer) {
         correctDiv.classList.remove("hide");
@@ -143,11 +142,9 @@ function answerCheck(event) {
         wrongDiv.classList.remove("hide");
         timeRemaining -= 10;
     }
-
     if(questCount === questions.length) {
-            setTimeout(stopQuiz, 1500);
+        setTimeout(stopQuiz, 1500);
     }
-
     setTimeout(showQuestions, 1500);
 }
 
@@ -167,107 +164,35 @@ function stopQuiz() {
  quizContainer.classList.add("hide"); 
  correctDiv.classList.add("hide");
  wrongDiv.classList.add("hide");
-showResults(); 
+ showResults(); 
 }
-
-
 
 function showResults() {
 scoreText.innerText = `Your final score is ${timeRemaining}.`
 resultPage.classList.remove("hide");
 
-
 submitBtn.addEventListener('submit', function (event){
+    //preventDefault() stops the page from refreshing on the submitbutton is clicked.
     event.preventDefault();
-   
-     
-    console.log("testing");
+    //window.locaiton takes user to the highscore page via href.
+    window.location.href = "./assets/high-score-page.html";
+    
+    //we are grabbing the value of what the user input for his/her initial.
     const userInitial = document.getElementById("user-initial").value;
     const score = timeRemaining;
-
-
     const playerScore = {userInitial, score};
+    // we grab the array from local storage if there is one, else we just set the scoreList to an empty array.
     var scoreList = JSON.parse(localStorage.getItem('scoreList')) || [];
-    scoreList.push(playerScore);
-    localStorage.setItem("scoreList", JSON.stringify(scoreList));
-    window.location.href = "./assets/high-score-page.html";
-    // window.location.href = "/timed-quiz/index.html";
-    // const hsListElement = document.getElementById("hs-entries");
-     
-    //     hsListElement.textContent = '';
-   
     
-    // for(var i = 0; i < scoreList.length; i++) {
-    //     var s = scoreList[i];
-    //    var hsEntry = document.createElement('li');
-
-    //     hsEntry.textContent = `${s.userInitial} - ${s.score}`;
-       
-    //     hsListElement.appendChild(hsEntry);
-        
-    // }
-
-});
+    scoreList.push(playerScore);
+    //we store the scorelist into local storage. JSON.stringify turns our array into a string since we can only store strings in local storage
+    localStorage.setItem("scoreList", JSON.stringify(scoreList));
+    document.getElementById("initial-form").reset();  
+    });
    
 };
- 
-document.addEventListener('DOMContentLoaded', showHighScore);
-
-function showHighScore(){
-
-
-    var scoreList = JSON.parse(localStorage.getItem('scoreList')) || [];
-    
-    // scoreList.push(playerScore);
-    localStorage.setItem("scoreList", JSON.stringify(scoreList));
-    
-    
-    const hsListElement = document.getElementById("hs-entries");
-     
-        hsListElement.textContent = '';
-   
-    
-    for(var i = 0; i < scoreList.length; i++) {
-        var s = scoreList[i];
-       var hsEntry = document.createElement('li');
-
-        hsEntry.textContent = `${s.userInitial} - ${s.score}`;
-       
-        hsListElement.appendChild(hsEntry);
-        
-    }
-
-}
 
 
 
-
-
-
-
-
-
-// function showHighScore() {
-//     console.log("here")
-//     // window.location.href = "./assets/high-score-page.html";
-//     const hsListElement = document.getElementById("hs-entries");
-
-//     if(null){
-//     hsListElement.textContent = '';
-//     }
-
-//     // console.log(scoreList);
-//     for(var i = 0; i < scoreList.length-1; i++) {
-//         console.log(scoreList[i])
-//         var hsEntry = document.createElement('li');
-       
-//         hsEntry.textContent = `${playerScore.userInitial} - ${playerScore.score}`;
-       
-//         hsListElement.appendChild(hsEntry);
-        
-//     }
-
-
-// }
 
 

@@ -7,13 +7,16 @@
     <title>High Score</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
-<body clas="hs-body">
 
+<body clas="hs-body"> 
+
+    <div class = "hs-div">
     <section class="hs-section">
         <div class="spacer"></div>
         <h1 class="title">Highscores</h1>
-        <ol id="hs-entries"></ol>
+        <ol class="hs-entries" id="hs-entries"></ol>
         <div>    
+
         <!--the onclick attribute is an event attribute that fires on the click of 
         the button. history is an object representing an array of URLs visited by user.
         .back() method brings user back one page.-->
@@ -21,9 +24,9 @@
         <button class="btn-hover" id="clear-hs-btn">Clear High Score</button>
         </div>
     </section>
+</div>
 
-    
-
-    <script defer src="script.js" ></script>
+    <script defer src="./hs-script.js" ></script>
 </body>
+
 </html>
