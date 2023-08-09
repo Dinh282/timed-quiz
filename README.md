@@ -29,10 +29,10 @@ Alternatively:
 3. You can also use the inspect tool to examine the source code form the browser as well as the local storage to see what information is storage there.
 
 Image of webpage:
-![image of Timed Quiz Main Page](./Assets/images/timed-quiz-main-page-img.png.png)
-![image of Timed Quiz Question](./Assets/images/question-img.png)
-![image of Timed Quiz Results](./Assets/images/result-img.png)
-![image of Timed Quiz Highscore Page](./Assets/images/high-score-img.png)
+![image of Timed Quiz Main Page](./assets/images/timed-quiz-main-page-img.png.png)
+![image of Timed Quiz Question](./assets/images/question-img.png)
+![image of Timed Quiz Results](./assets/images/result-img.png)
+![image of Timed Quiz Highscore Page](./assets/images/high-score-img.png)
 
 ## Credits
 1. https://www.youtube.com/@JamesQQuick (James Q Quick Youtube channel has a tutorial on how to create a quiz using JS.)
