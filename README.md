@@ -29,7 +29,7 @@ Alternatively:
 3. You can also use the inspect tool to examine the source code form the browser as well as the local storage to see what information is storage there.
 
 Image of webpage:
-![image of Timed Quiz Main Page](./assets/images/timed-quiz-main-page-img.png.png)
+![image of Timed Quiz Main Page](./assets/images/timed-quiz-main-page-img.png)
 ![image of Timed Quiz Question](./assets/images/question-img.png)
 ![image of Timed Quiz Results](./assets/images/result-img.png)
 ![image of Timed Quiz Highscore Page](./assets/images/high-score-img.png)
